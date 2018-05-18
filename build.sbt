@@ -13,6 +13,7 @@ lazy val log4cats = project.in(file("."))
     scribeJS,
     log4sJVM,
     log4sJS,
+    iolog4s,
     docs
   )
   .settings(noPublishSettings)
@@ -69,6 +70,16 @@ lazy val scribe = crossProject.in(file("scribe"))
 
 lazy val scribeJVM = scribe.jvm
 lazy val scribeJS = scribe.js
+
+lazy val iolog4s = project.in(file("iolog4s"))
+  .settings(commonSettings, releaseSettings)
+  .dependsOn(coreJVM)
+  .settings(
+    name := "log4cats-iolog4s",
+    libraryDependencies ++= Seq(
+      "org.iolog4s" %% "iolog4s" % "0.0.4"
+    )
+  )
 
 lazy val contributors = Seq(
   "ChristopherDavenport" -> "Christopher Davenport"
